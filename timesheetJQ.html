@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+    table, th, td {
+  border: 1px solid black;
+}</style>
+
+    <!-- Firebase References -->
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+</head>
+<body>
+    First Name: <input type="text" name="fname" id="fname" /><br>
+    Last Name: <input type="text" name="lname" id="lname" /><br> 
+    Age: <input type="text" name="Age" id="Age" /><br><br>
+    <button id="jS" onclick="addRowJS();">Add Row Using JavaScript</button><br>
+    <button id="jQ" onclick="addRowJQuery();">Add Row Using Jquery</button><br>
+    <button id="addABC">Add Sample ABC Row</button>
+    <button id="addDE-">Add Sample DE- Row</button>
+    <button id="add-EF">Add Sample -EF Row</button>
+    <button id="clearButton">Clear Values</button>
+    <table id="timesheet-table">
+        <tbody>
+        <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+       
+        <tr>
+        <<th>Employee</th>
+        <th>Role</th>
+        <th>Start Date</th>
+        <th>Months Worked</th>
+        <th>Monthly Rate</th>
+        <th>Total Billed</th>
+        </tr> 
+    </tbody>
+    </table>
+
+
+
+<script src="https://code.jquery.com/jquery.js"></script>
+<script>
+
+
+function clearInputs () {
+    console.log(fname);
+    console.log(lname);
+    console.log(Age);
+    $("#fname").val("");
+    $("#lname").val("");
+    $("#Age").val("");
+}
+
+$("#clearButton").click(clearInputs);
+
+// $(function() {
+//       $("#button").click( function()
+//            {
+//              alert('button clicked');
+//            }
+//       );
+// });
+
+// JavaScript Function
+function addRowJS() {
+    var fname = document.getElementById('fname').value;
+    var lname = document.getElementById('lname').value;
+    var age = document.getElementById('Age').value;
+    var table = document.getElementsByTagName('table')[0];
+    var newRow = table.insertRow(table.rows.length);
+    var cel1 = newRow.insertCell(0);
+    var cel2 = newRow.insertCell(1);
+    var cel3 = newRow.insertCell(2);
+    cel1.innerHTML = fname ;
+    cel2.innerHTML = lname ;
+    cel3.innerHTML = age;
+
+    clearInputs();
+}
+
+// Jquery Function
+
+function addRowJQuery() {
+console.log("clicked");
+
+var tbody = $('#timesheet-table').children('table');
+// //Then if no tbody just select your table 
+var table = tbody.length ? tbody : $('#timesheet-table');
+
+var firstName = $("#fname").val().trim(); console.log(firstName);
+var lastName = $("#lname").val().trim(); console.log(lastName);
+var ageInput = $("#Age").val().trim(); console.log(Age);
+$("#timesheet-table tbody").append(
+      "<tr>" +
+        "<td>" + firstName + "</td>" +
+        "<td>" + lastName + "</td>" +
+        "<td>" + ageInput + "</td>" +
+      "</tr>"
+)
+      clearInputs()
+;}
+
+$('#addABC').click(function(){
+    //Add row
+    $("#timesheet-table").append('<tr><td>A</td><td>B</td><td>C</td></tr>');
+})
+
+$('#addDE-').click(function(){
+    //Add row
+    $("#timesheet-table").append('<tr><td>D</td><td>E</td><td></td></tr>');
+})
+$('#add-EF').click(function(){
+    //Add row
+    $("#timesheet-table").append('<tr><td></td><td>E</td><td>E</td></tr>');
+})
+</script>
+</body>
+</html>
