@@ -12,6 +12,31 @@ var firebaseConfig = {
   var database = firebase.database();
 
 
+  database.ref().on("child_added", function(snapshot) {
+    // console.log(snapshot);
+    var sv = snapshot.val();
+
+    // console.log(sv.eName);
+    // console.log(sv.role);
+    // console.log(sv.startDate);
+    // console.log(sv.rate);
+
+    // TODO call calcMonthsWorked
+    calcMonthsWorked(sv.startDate);
+    // $("#eName").prepend(sv.eName);
+  
+  // If any errors are experienced, log them to console.
+  }, function(errorObject) {
+    console.log("The read failed: " + errorObject.code);
+  });
+  
+  function calcMonthsWorked(dateVar) {
+    console.log(dateVar);
+  }
+  
+  
+
+
 
 
   $("#add-employee-btn").on("click", function(event) {
@@ -22,12 +47,8 @@ var firebaseConfig = {
     var startDate = ($("#start-input").val().trim());
     var rate = ($("#rate-input").val().trim());
   
-    // Log the Bidder and Price (Even if not the highest)
-    console.log(eName);
-    console.log(role);
-    console.log(startDate);
-    console.log(rate);
- 
+  
+  
       database.ref().push({
         eName: eName,
         role: role,
